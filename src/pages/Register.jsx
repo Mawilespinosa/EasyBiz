@@ -1,153 +1,98 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
+import axios from "axios";
 
 const Register = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm();
-  
-  const onSubmit = async (data) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [message, setMessage] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post("https://tu-dominio.com/api/register.php", {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        role: data.role, // Enviar el rol seleccionado
-      });
-      alert(response.data.message);
+      const response = await axios.post(
+        "https://www.davidespinosaoficial.com/EmprendeFacilBackend/register.php",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.data.success) {
+        setFormData({ name: "", email: "", password: "" }); // Limpiar el formulario
+      }
+      setMessage(response.data.message);
     } catch (error) {
-      alert(error.response?.data?.error || "Error al registrar.");
+      setMessage("Error al registrar: " + (error.response?.data?.message || error.message));
     }
   };
-  
-
-  const password = watch("password");
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-      <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center text-gray-700">
-          Crear Cuenta
-        </h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
-          {/* Nombre completo */}
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-600 font-medium mb-2">
-              Nombre Completo
-            </label>
-            <input
-              type="text"
-              id="name"
-              {...register("name", { required: "El nombre es obligatorio" })}
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none ${
-                errors.name ? "border-red-500" : "border-gray-300"
-              }`}
-            />
-            {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-            )}
-          </div>
-
-          {/* Correo electrónico */}
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-600 font-medium mb-2">
-              Correo Electrónico
-            </label>
-            <input
-              type="email"
-              id="email"
-              {...register("email", {
-                required: "El correo es obligatorio",
-                pattern: {
-                  value: /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/,
-                  message: "El correo no es válido",
-                },
-              })}
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none ${
-                errors.email ? "border-red-500" : "border-gray-300"
-              }`}
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-            )}
-          </div>
-
-          {/* Contraseña */}
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-gray-600 font-medium mb-2">
-              Contraseña
-            </label>
-            <input
-              type="password"
-              id="password"
-              {...register("password", {
-                required: "La contraseña es obligatoria",
-                minLength: {
-                  value: 6,
-                  message: "La contraseña debe tener al menos 6 caracteres",
-                },
-              })}
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none ${
-                errors.password ? "border-red-500" : "border-gray-300"
-              }`}
-            />
-            {errors.password && (
-              <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
-            )}
-          </div>
-
-          {/* Confirmar Contraseña */}
-          <div className="mb-4">
-            <label
-              htmlFor="confirmPassword"
-              className="block text-gray-600 font-medium mb-2"
-            >
-              Confirmar Contraseña
-            </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              {...register("confirmPassword", {
-                required: "Confirma tu contraseña",
-                validate: (value) =>
-                  value === password || "Las contraseñas no coinciden",
-              })}
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none ${
-                errors.confirmPassword ? "border-red-500" : "border-gray-300"
-              }`}
-            />
-            {errors.confirmPassword && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.confirmPassword.message}
-              </p>
-            )}
-          </div>
-
-          <label htmlFor="role">Rol</label>
-          <select
-            id="role"
-            {...register("role", { required: true })}
-            className="w-full px-4 py-2 border rounded-lg mb-8"
-          >
-            <option value="1">Superusuario</option>
-            <option value="2">Usuario</option>
-            <option value="3">Cliente</option>
-          </select>
-
-          {/* Botón de registro */}
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-300"
-          >
-            Registrarse
-          </button>
-        </form>
-      </div>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <form
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        onSubmit={handleSubmit}
+      >
+        <h2 className="text-2xl font-bold mb-6">Registro de Usuario</h2>
+        
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Nombre
+          </label>
+          <input
+            type="text"
+            name="name"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Ingresa tu nombre"
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Correo Electrónico
+          </label>
+          <input
+            type="email"
+            name="email"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Ingresa tu correo"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Contraseña
+          </label>
+          <input
+            type="password"
+            name="password"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Crea una contraseña"
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
+        {message && <p className="mb-4 text-red-500">{message}</p>}
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Registrarse
+        </button>
+      </form>
     </div>
   );
 };
 
 export default Register;
+

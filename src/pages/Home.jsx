@@ -19,7 +19,7 @@ const Home = () => {
         <p className="mt-4 text-lg md:text-xl">
           Crea tu página, vende productos y aloja tus cursos en un solo lugar.
         </p>
-        <button className="mt-6 px-6 py-3 bg-white text-blue-500 rounded-full shadow-md hover:bg-gray-100 transition duration-300">
+        <button onClick={() => navigate("/EasyBiz/register")} className="mt-6 px-6 py-3 bg-white text-blue-500 rounded-full shadow-md hover:bg-gray-100 transition duration-300">
           Comienza Ahora
         </button>
       </div>
@@ -112,7 +112,7 @@ const Home = () => {
           Regístrate ahora y lleva tu emprendimiento al siguiente nivel.
         </p>
         <button
-          onClick={() => navigate("/register")}
+          onClick={() => navigate("/EasyBiz/register")}
           className="mt-6 px-8 py-4 bg-white text-blue-700 font-semibold rounded-full shadow-lg hover:bg-gray-100 transition duration-300"
         >
           Regístrate Gratis

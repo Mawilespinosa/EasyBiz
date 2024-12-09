@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext"; // Importa el contexto
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated, login, logout } = useAuth(); // Obtén el estado y funciones del contexto
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(); // Llama a la función logout del contexto
+    navigate("/home");
+  };
 
   return (
     <nav className="bg-blue-600 text-white">
@@ -28,23 +35,49 @@ const NavBar = () => {
               Inicio
             </button>
             <button
-              onClick={() => navigate("/products")}
-              className="hover:text-blue-300"
-            >
-              Productos
-            </button>
-            <button
-              onClick={() => navigate("/courses")}
-              className="hover:text-blue-300"
-            >
-              Cursos
-            </button>
-            <button
               onClick={() => navigate("/contact")}
               className="hover:text-blue-300"
             >
               Contacto
             </button>
+            {isAuthenticated && (
+              <>
+                <button
+                  onClick={() => navigate("/products")}
+                  className="hover:text-blue-300"
+                >
+                  Productos
+                </button>
+                <button
+                  onClick={() => navigate("/courses")}
+                  className="hover:text-blue-300"
+                >
+                  Cursos
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* Botones de sesión (desktop) */}
+          <div className="hidden md:flex">
+            {!isAuthenticated ? (
+              <button
+                onClick={() => {
+                  navigate("/EasyBiz/login");
+                  
+                }}
+                className="bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-400 transition duration-300"
+              >
+                Iniciar Sesión
+              </button>
+            ) : (
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 px-4 py-2 rounded-md hover:bg-red-400 transition duration-300"
+              >
+                Cerrar Sesión
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -95,30 +128,47 @@ const NavBar = () => {
           </button>
           <button
             onClick={() => {
-              navigate("/products");
-              setIsOpen(false);
-            }}
-            className="block px-4 py-2 hover:bg-blue-500"
-          >
-            Productos
-          </button>
-          <button
-            onClick={() => {
-              navigate("/courses");
-              setIsOpen(false);
-            }}
-            className="block px-4 py-2 hover:bg-blue-500"
-          >
-            Cursos
-          </button>
-          <button
-            onClick={() => {
               navigate("/contact");
               setIsOpen(false);
             }}
             className="block px-4 py-2 hover:bg-blue-500"
           >
             Contacto
+          </button>
+          {isAuthenticated && (
+            <>
+              <button
+                onClick={() => {
+                  navigate("/products");
+                  setIsOpen(false);
+                }}
+                className="block px-4 py-2 hover:bg-blue-500"
+              >
+                Productos
+              </button>
+              <button
+                onClick={() => {
+                  navigate("/courses");
+                  setIsOpen(false);
+                }}
+                className="block px-4 py-2 hover:bg-blue-500"
+              >
+                Cursos
+              </button>
+            </>
+          )}
+          <button
+            onClick={() => {
+              if (isAuthenticated) {
+                handleLogout();
+              } else {
+                navigate("/EasyBiz/login");                
+              }
+              setIsOpen(false);
+            }}
+            className="block px-4 py-2 hover:bg-blue-500"
+          >
+            {isAuthenticated ? "Cerrar Sesión" : "Iniciar Sesión"}
           </button>
         </div>
       )}
@@ -127,3 +177,5 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+
