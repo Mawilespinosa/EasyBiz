@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext"; // Contexto de autenticación
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [roleChoice, setRoleChoice] = useState("client"); // client or business
+  const [roleChoice, setRoleChoice] = useState("client"); // client o business
+  const [active, setActive] = useState(""); // Mensaje de error o estado
   const navigate = useNavigate();
-  const { login } = useAuth(); // Función del contexto para actualizar autenticación
-  const [active, setActive] = useState("");
+  const { login } = useAuth(); // Método del contexto para iniciar sesión
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -21,30 +22,30 @@ const Login = () => {
       if (response.data.success) {
         const user = response.data.user;
 
-        // Actualizar el estado de autenticación en el contexto
+        // Llamar a la función de login desde el AuthContext
         login({
           role: user.role_id, // 1 = superusuario, 2 = usuario normal
           email: user.email,
-          roleChoice, // Guardar si es cliente o negocio
+          roleChoice, // Cliente o negocio
         });
 
         // Redirigir según el rol del usuario
         if (user.role_id === 1) {
           navigate("/EasyBiz/admin-dashboard");
         } else if (user.role_id === 2) {
-          if (roleChoice === "client") {
-            navigate("/EasyBiz/client-dashboard");
-          } else {
-            navigate("/EasyBiz/business-dashboard");
-          }
+          navigate(
+            roleChoice === "client"
+              ? "/EasyBiz/client-dashboard"
+              : "/EasyBiz/business-dashboard"
+          );
         }
       } else {
-        setActive( response.data.message);
-        setPassword(""); // Limpiar el campo de contraseña     
+        setActive(response.data.message); // Mostrar mensaje de error
+        setPassword(""); // Limpiar la contraseña
       }
     } catch (error) {
-      console.error("Error during login:", error);
-      setActive( "Error al iniciar sesión. Intenta nuevamente.")
+      console.error("Error durante el inicio de sesión:", error);
+      setActive("Error al iniciar sesión. Intenta nuevamente.");
     }
   };
 
@@ -113,6 +114,7 @@ const Login = () => {
 };
 
 export default Login;
+
 
 
 

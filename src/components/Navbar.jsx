@@ -4,12 +4,12 @@ import { useAuth } from "../contexts/AuthContext"; // Importa el contexto
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, login, logout } = useAuth(); // Obtén el estado y funciones del contexto
+  const { user, login, logout } = useAuth(); // Obtén el estado y funciones del contexto
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout(); // Llama a la función logout del contexto
-    navigate("/home");
+    navigate("/EasyBiz/login");
   };
 
   return (
@@ -19,7 +19,7 @@ const NavBar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <button
-              onClick={() => navigate("/home")}
+              onClick={() => navigate("/EasyBiz/home")}
               className="text-2xl font-bold hover:text-blue-300"
             >
               EmprendeFácil
@@ -29,7 +29,7 @@ const NavBar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-4">
             <button
-              onClick={() => navigate("/home")}
+              onClick={() => navigate("/EasyBiz/home")}
               className="hover:text-blue-300"
             >
               Inicio
@@ -40,7 +40,7 @@ const NavBar = () => {
             >
               Contacto
             </button>
-            {isAuthenticated && (
+            {user && (
               <>
                 <button
                   onClick={() => navigate("/products")}
@@ -60,11 +60,10 @@ const NavBar = () => {
 
           {/* Botones de sesión (desktop) */}
           <div className="hidden md:flex">
-            {!isAuthenticated ? (
+            {!user ? (
               <button
                 onClick={() => {
-                  navigate("/EasyBiz/login");
-                  
+                  navigate("/EasyBiz/login")                  
                 }}
                 className="bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-400 transition duration-300"
               >
@@ -72,7 +71,7 @@ const NavBar = () => {
               </button>
             ) : (
               <button
-                onClick={handleLogout}
+                
                 className="bg-red-500 px-4 py-2 rounded-md hover:bg-red-400 transition duration-300"
               >
                 Cerrar Sesión
@@ -135,7 +134,7 @@ const NavBar = () => {
           >
             Contacto
           </button>
-          {isAuthenticated && (
+          {user && (
             <>
               <button
                 onClick={() => {
@@ -159,16 +158,16 @@ const NavBar = () => {
           )}
           <button
             onClick={() => {
-              if (isAuthenticated) {
-                handleLogout();
-              } else {
+              if (user) {
+                handleLogout();      
+              } else {                
                 navigate("/EasyBiz/login");                
               }
               setIsOpen(false);
             }}
             className="block px-4 py-2 hover:bg-blue-500"
           >
-            {isAuthenticated ? "Cerrar Sesión" : "Iniciar Sesión"}
+            {user ? "Cerrar Sesión" : "Iniciar Sesión"}
           </button>
         </div>
       )}

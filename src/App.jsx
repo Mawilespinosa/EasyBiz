@@ -9,9 +9,9 @@ import Contact from './pages/Contact' */
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Dashboard from './pages/dashboard'
-import Store from './pages/store'
+import Store from './pages/Store'
 import Admin from './pages/Admin'
-
+import './styles/styles.css';
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
       <main>
           <Routes>
             <Route path="/EasyBiz/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/EasyBiz/home" element={<Home />} />
             <Route path="/EasyBiz/admin-dashboard" element={<Admin />} />
             <Route path="/EasyBiz/business-dashboard" element={<Dashboard />} />
             <Route path="/EasyBiz/client-dashboard" element={<Store />} /> 
