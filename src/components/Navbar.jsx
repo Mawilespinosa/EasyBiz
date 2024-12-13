@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext"; // Importa el contexto
+import { useAuth } from "../contexts/AuthContext";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, login, logout } = useAuth(); // Obtén el estado y funciones del contexto
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout(); // Llama a la función logout del contexto
+    logout();
     navigate("/EasyBiz/login");
   };
 
@@ -57,13 +57,11 @@ const NavBar = () => {
               </>
             )}
           </div>
-
-          {/* Botones de sesión (desktop) */}
           <div className="hidden md:flex">
             {!user ? (
               <button
                 onClick={() => {
-                  navigate("/EasyBiz/login")                  
+                  navigate("/EasyBiz/login");
                 }}
                 className="bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-400 transition duration-300"
               >
@@ -71,7 +69,7 @@ const NavBar = () => {
               </button>
             ) : (
               <button
-                
+                onClick={handleLogout}
                 className="bg-red-500 px-4 py-2 rounded-md hover:bg-red-400 transition duration-300"
               >
                 Cerrar Sesión
@@ -176,5 +174,6 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
 
 
