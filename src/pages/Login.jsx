@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext"; // Contexto de autenticación
+import { useNavigate,Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [roleChoice, setRoleChoice] = useState("client"); // client o business
-  const [active, setActive] = useState(""); // Mensaje de error o estado
+  const [roleChoice, setRoleChoice] = useState("client");
+  const [active, setActive] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth(); // Método del contexto para iniciar sesión
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,9 +28,9 @@ const Login = () => {
 
         // Llamar a la función de login desde el AuthContext
         login({
-          role: user.role_id, // 1 = superusuario, 2 = usuario normal
+          role: user.role_id,
           email: user.email,
-          roleChoice, // Cliente o negocio
+          roleChoice,
         });
 
         // Redirigir según el rol del usuario
@@ -40,8 +44,8 @@ const Login = () => {
           );
         }
       } else {
-        setActive(response.data.message); // Mostrar mensaje de error
-        setPassword(""); // Limpiar la contraseña
+        setActive(response.data.message);
+        setPassword("");
       }
     } catch (error) {
       console.error("Error durante el inicio de sesión:", error);
@@ -50,70 +54,72 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <form
+    <Container className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+      <Form
         onSubmit={handleLogin}
-        className="bg-white p-6 rounded-lg shadow-md w-80"
+        className="p-4 border rounded shadow-sm bg-white w-100"
+        style={{ maxWidth: "400px" }}
       >
-        <h2 className="text-2xl font-bold mb-4 text-center">Iniciar Sesión</h2>
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700">Correo:</label>
-          <input
+        <h2 className="text-center mb-4">Iniciar Sesión</h2>
+
+        {active && <Alert variant="danger">{active}</Alert>}
+
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Correo:</Form.Label>
+          <Form.Control
             type="email"
-            id="email"
-            className="w-full p-2 border rounded"
+            placeholder="Ingresa tu correo"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700">Contraseña:</label>
-          <input
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="password">
+          <Form.Label>Contraseña:</Form.Label>
+          <Form.Control
             type="password"
-            id="password"
-            className="w-full p-2 border rounded"
+            placeholder="Ingresa tu contraseña"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 mb-2">Selecciona tu rol:</label>
-          <div className="flex gap-4">
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="roleChoice"
-                value="client"
-                checked={roleChoice === "client"}
-                onChange={() => setRoleChoice("client")}
-              />
-              Cliente
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name="roleChoice"
-                value="business"
-                checked={roleChoice === "business"}
-                onChange={() => setRoleChoice("business")}
-              />
-              Gestionar Negocio
-            </label>
+          <span> <Link to="/EasyBiz/reset-password">Olvidaste tu contraseña?</Link></span>
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Selecciona tu rol:</Form.Label>
+          <div className="d-flex gap-3 mb-3">
+            <Form.Check
+              type="radio"
+              label="Cliente"
+              name="roleChoice"
+              value="client"
+              checked={roleChoice === "client"}
+              onChange={() => setRoleChoice("client")}
+            />
+            <Form.Check
+              type="radio"
+              label="Gestionar Negocio"
+              name="roleChoice"
+              value="business"
+              checked={roleChoice === "business"}
+              onChange={() => setRoleChoice("business")}
+            />
           </div>
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-        >
+          <span className="m-2">No eres usuario: <Link to="/EasyBiz/register">Registrase</Link></span>
+        </Form.Group>
+
+        <Button variant="primary" type="submit" className="w-100">
           Ingresar
-        </button>
-        {active && <p className="text-red-500 mt-3">{active}</p>}
-      </form>
-    </div>
+        </Button>
+      </Form>
+    </Container>
   );
 };
 
 export default Login;
+
 
 
 

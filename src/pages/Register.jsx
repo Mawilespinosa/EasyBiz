@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -31,68 +35,80 @@ const Register = () => {
       }
       setMessage(response.data.message);
     } catch (error) {
-      setMessage("Error al registrar: " + (error.response?.data?.message || error.message));
+      setMessage(
+        "Error al registrar: " + (error.response?.data?.message || error.message)
+      );
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    <Container className="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+      <Form
         onSubmit={handleSubmit}
+        className="p-4 border rounded shadow-sm bg-white w-100"
+        style={{ maxWidth: "400px" }}
       >
-        <h2 className="text-2xl font-bold mb-6">Registro de Usuario</h2>
-        
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Nombre
-          </label>
-          <input
+        <h2 className="text-center mb-4">Registro de Usuario</h2>
+
+        {message && (
+          <Alert variant={message.includes("Error") ? "danger" : "success"}>
+            {message}
+          </Alert>
+        )}
+
+        <Form.Group className="mb-3" controlId="name">
+          <Form.Label>Nombre</Form.Label>
+          <Form.Control
             type="text"
             name="name"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Ingresa tu nombre"
             value={formData.name}
             onChange={handleChange}
+            required
           />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Correo Electrónico
-          </label>
-          <input
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Correo Electrónico</Form.Label>
+          <Form.Control
             type="email"
             name="email"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Ingresa tu correo"
             value={formData.email}
             onChange={handleChange}
+            required
           />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Contraseña
-          </label>
-          <input
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="password">
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control
             type="password"
             name="password"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Crea una contraseña"
             value={formData.password}
             onChange={handleChange}
+            required
           />
-        </div>
-        {message && <p className="mb-4 text-red-500">{message}</p>}
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
+          <Form.Check  
+            className="mt-4"
+            type="checkbox" label="Acepto los términos y condiciones"  
+            name="terms"  
+            checked={formData.terms}  
+            onChange={handleChange}  
+            required  
+          />           
+
+        </Form.Group>
+
+        <Button variant="primary" type="submit" className="w-100">
           Registrarse
-        </button>
-      </form>
-    </div>
+        </Button>
+      </Form>
+    </Container>
   );
 };
 
 export default Register;
+
 
