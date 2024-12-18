@@ -1,7 +1,5 @@
-import React from 'react'
 import {Routes,Route,Navigate} from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
-import {useAuth} from '../contexts/AuthContext'
 
  {/* Paginas */}
 import Home from '../pages/Home'
@@ -12,8 +10,8 @@ import Store from '../pages/Store'
 import Admin from '../pages/Admin'
 import Unauthorized from '../pages/Unauthorized'
 
-function AppRoutes() {
-    const { user } = useAuth();
+function AppRoutes() { 
+
   return (
     <Routes>     
         {/* Rutas publicas */}
@@ -27,11 +25,9 @@ function AppRoutes() {
 
         <Route element={<PrivateRoute allowedRoles={[1]} />}>
             <Route path="/EasyBiz/admin-dashboard" element={<Admin/>} />
-            <Route path="/EasyBiz/business-dashboard" element={<Dashboard />} />
-            <Route path="/EasyBiz/client-dashboard" element={<Store />} />
         </Route>    
 
-        <Route element={<PrivateRoute allowedRoles={[2]} />}>
+        <Route element={<PrivateRoute allowedRoles={[1,2]} />}>
             <Route path="/EasyBiz/business-dashboard" element={<Dashboard />} />
             <Route path="/EasyBiz/client-dashboard" element={<Store />} />
         </Route>     
