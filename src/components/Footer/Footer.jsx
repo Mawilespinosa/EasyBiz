@@ -1,9 +1,10 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import logo from "../img/logo.png";
+
+
+import "./Footer.css"
+import logo from "..//..//assets/images/logo.png";
 
 const Footer = () => {
-  const navigate = useNavigate();
+
 
   return (
     <footer className="footer">

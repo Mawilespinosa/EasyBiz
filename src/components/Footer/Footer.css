@@ -1,0 +1,41 @@
+.footer {
+    background: linear-gradient(135deg, #1E45BB, #0f172a);
+    color: #ffffff;
+    padding: 2rem 1rem;
+    font-family: "Arial", sans-serif;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .footer-container-logo{
+    display: flex;  
+    align-items: center;     
+    gap: 1rem;    
+    text-align: center; 
+  }
+  
+  .footer-logo{
+  width: 100px;  
+  }
+  .span-footer-logo{
+    margin-left: 15%;
+    align-items: center;
+    color: #ffffff;  
+    font-size: 1.5rem;  
+    font-weight: bold;  
+  }
+  
+  .footer-divider {
+    height: 1px;
+    background-color: #334155;
+    margin: 0 0;
+  }
+  
+  

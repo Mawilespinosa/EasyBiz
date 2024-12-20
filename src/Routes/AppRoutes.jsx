@@ -2,9 +2,9 @@ import {Routes,Route,Navigate} from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 
  {/* Paginas */}
-import Home from '../pages/Home'
-import Register from '../pages/Register'
-import Login from '../pages/Login'
+import Home from '../pages/Home/Home'
+import Register from '../components/Forms/Register'
+import Login from '../components/Forms/Login'
 import Dashboard from '../pages/dashboard'
 import Store from '../pages/Store'
 import Admin from '../pages/Admin'

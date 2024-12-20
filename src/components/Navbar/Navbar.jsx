@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
-import logo from "../img/logo.png"; // Asegúrate de que la ruta sea correcta
+import { useAuth } from "../../contexts/AuthContext";
+import logo from "../../assets/images/logo.png";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
