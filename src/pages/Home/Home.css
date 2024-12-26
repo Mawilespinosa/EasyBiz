@@ -30,7 +30,8 @@
   }
   
   .hero button:hover {
-    background-color: #f3f3f3;
+    background-color: #eeeeee;
+    color: #0056b3;
   }
   
   /* Services Section */
@@ -128,7 +129,7 @@
   
   .call-to-action button {
     background-color: white;
-    color: #0056b3;
+    color:#007bff;
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 9999px;
@@ -139,6 +140,7 @@
   
   .call-to-action button:hover {
     background-color: #f3f3f3;
+    color: #0056b3;
   }
   
   .icon-container {

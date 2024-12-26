@@ -1,3 +1,5 @@
+import CustomButton from "../../../components/Shared/Button";
+
 
 function Hero({ navigate }) {    
   
@@ -8,9 +10,7 @@ function Hero({ navigate }) {
       <p>
         Crea tu página, vende productos y aloja tus cursos en un solo lugar.
       </p>
-      <button onClick={() => navigate("/EasyBiz/register")}>
-        Comienza Ahora
-      </button>
+      <CustomButton text="Comienza Ahora" variant="success" onClick={() => navigate("/EasyBiz/register")}/>
     </div>
   );
 }
