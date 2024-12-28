@@ -12,3 +12,6 @@ body {
 .Azul-Oscuro {
   background: linear-gradient(135deg, #1E45BB, #0f172a);
 }
+.Azul-Claro {
+  background: linear-gradient(135deg,#65abf7, #007bff);
+}

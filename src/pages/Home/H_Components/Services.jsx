@@ -6,7 +6,7 @@ import {
 
 function Services() {
   return (
-    <div className="services">
+    <div className="services p-5">
     <div className="service-card">
       <div className="icon-container">
         <HomeIcon className="icon" />
