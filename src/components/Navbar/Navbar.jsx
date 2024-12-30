@@ -27,7 +27,7 @@ const NavBar = () => {
               <Nav.Link onClick={() => navigate("/products")}>Productos</Nav.Link>
               <Nav.Link onClick={() => navigate("/courses")}>Cursos</Nav.Link>
               <Nav.Link onClick={() => navigate("/EasyBiz/client")}>Cliente</Nav.Link>
-              <Nav.Link onClick={() => navigate("/EasyBiz/business")}>Negocio</Nav.Link>
+              <Nav.Link onClick={() => navigate("/EasyBiz/Managemet")}>Negocio</Nav.Link>
             </>
           )}
         </Nav>
@@ -59,7 +59,7 @@ const NavBar = () => {
                 <Nav.Link onClick={() => navigate("/products")} className="text-white">Productos</Nav.Link>
                 <Nav.Link onClick={() => navigate("/courses")} className="text-white">Cursos</Nav.Link>
                 <Nav.Link onClick={() => navigate("/EasyBiz/client")} className="text-white">Cliente</Nav.Link>
-                <Nav.Link onClick={() => navigate("/EasyBiz/business")} className="text-white">Negocio</Nav.Link>
+                <Nav.Link onClick={() => navigate("/EasyBiz/Managemet")} className="text-white">Negocio</Nav.Link>
               </>
             )}
           </Nav>

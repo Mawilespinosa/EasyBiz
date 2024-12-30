@@ -1,0 +1,20 @@
+.nav-link:hover {
+  background-color: #495057;
+  border-radius: 4px;
+}
+.sidebarContent{
+ width: 250px;
+ min-width: 150px
+}
+.managementContent{
+  overflow-y: auto;
+  max-height: 100vh;
+  padding: 16px;
+  width: 100%;
+
+}
+@media (max-width: 768px) {
+  .managementContent{    
+    padding: 8px; /* Reduce el padding en pantallas pequeñas */
+  }
+}

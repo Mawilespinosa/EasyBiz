@@ -1,10 +1,11 @@
 
 function Dashboard() {
   return (
-    <>
-      dashboard page   
-    </>
+    <div>
+      dashboard
+    </div>
   )
 }
 
 export default Dashboard
+
