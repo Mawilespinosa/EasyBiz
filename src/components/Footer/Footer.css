@@ -37,5 +37,11 @@
     background-color: #334155;
     margin: 0 0;
   }
+  @media (max-width: 768px) {
+    .span-footer-logo{
+      margin-left: 0;
+      font-size:0.6rem;  
+    }
+  }
   
   

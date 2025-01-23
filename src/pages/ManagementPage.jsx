@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import Sidebar from "../components/Sidebar/Sidebar"
-import Home from "./Home/Home";
+import Dashboard from "./dashboard";
 
 const ManagementPage = () => {
   const [selectedPage, setSelectedPage] = useState("dashboard");
@@ -17,7 +17,7 @@ const ManagementPage = () => {
 
       {/* Contenido principal */}
       <div className="managementContent p-4 flex-grow-1">
-        {selectedPage === "dashboard" && <Home/>}
+        {selectedPage === "dashboard" && <Dashboard/>}
         {selectedPage === "products" && <h1>Gestión de Productos</h1>}
         {selectedPage === "clients" && <h1>Gestión de Clientes</h1>}
         {selectedPage === "orders" && <h1>Gestión de Pedidos</h1>}

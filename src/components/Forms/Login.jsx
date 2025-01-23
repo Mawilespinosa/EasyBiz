@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState} from "react";
 import axios from "axios";
 import { useNavigate,Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
@@ -25,8 +25,10 @@ const Login = () => {
 
       if (response.data.success) {
         const user = response.data.user;
-
+        // Lógica para determinar el rolChoice según el rol del usuario
+        // Por ejemplo, si el usuario es un cliente, establecer roleChoice en "client"
         // Llamar a la función de login desde el AuthContext
+ 
         login({
           role: user.role_id,
           email: user.email,
@@ -38,9 +40,7 @@ const Login = () => {
           navigate("/EasyBiz/admin-dashboard");
         } else if (user.role_id === 2) {
           navigate(
-            roleChoice === "client"
-              ? "/EasyBiz/client-dashboard"
-              : "/EasyBiz/business-dashboard"
+            roleChoice === "client" ? "/EasyBiz/client" : "/EasyBiz/Managemet"
           );
         }
       } else {

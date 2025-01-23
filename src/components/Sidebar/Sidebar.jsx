@@ -4,7 +4,7 @@ import "./Sidebar.css"
 
 const Sidebar = ({ onNavigate }) => {
   return (
-    <div className="sidebarContent bg-dark text-white vh-100 d-flex flex-column p-3" >
+    <div className="sidebarContent bg-dark text-white vh-100 d-flex flex-column p-2 pt-4" >
       <h5 className="text-center mb-4">Gestión</h5>
       <Nav className="flex-column">
         <Nav.Link
