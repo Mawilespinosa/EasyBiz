@@ -15,6 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -35,14 +36,8 @@ const Login = () => {
           roleChoice,
         });
 
-        // Redirigir según el rol del usuario
-        if (user.role_id === 1) {
-          navigate("/EasyBiz/admin-dashboard");
-        } else if (user.role_id === 2) {
-          navigate(
-            roleChoice === "client" ? "/EasyBiz/client" : "/EasyBiz/Managemet"
-          );
-        }
+        redirect(user.role_id,roleChoice);
+
       } else {
         setActive(response.data.message);
         setPassword("");
@@ -51,6 +46,20 @@ const Login = () => {
       console.error("Error durante el inicio de sesión:", error);
       setActive("Error al iniciar sesión. Intenta nuevamente.");
     }
+  };
+
+  const redirect = (role,roleChoice) => {
+        // Redirigir según el rol del usuario
+
+        if (role === 1) {
+            navigate("/EasyBiz/Management");
+        } else if (role === 2) {
+          if(roleChoice === "client"){
+            navigate("/EasyBiz/client");
+          }else{                      
+            navigate("/EasyBiz/Management");
+          }       
+        }
   };
 
   return (
@@ -110,7 +119,7 @@ const Login = () => {
           <span className="m-2">No eres usuario: <Link to="/EasyBiz/register">Registrase</Link></span>
         </Form.Group>
 
-        <Button variant="primary" type="submit" className="w-100">
+        <Button variant="primary" type="submit" className="w-100" >
           Ingresar
         </Button>
       </Form>

@@ -1,5 +1,5 @@
 
-import { Navigate, Outlet } from "react-router-dom";
+import {  Outlet } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 const PublicRoute = () => {
@@ -7,7 +7,7 @@ const PublicRoute = () => {
 if(!user){
     console.log("no esta autenticado")
 }
-  return !user ? <Outlet /> : <Navigate to="/EasyBiz/home" replace />;
+  return !user ? <Outlet /> : null;
 };
 
 export default PublicRoute;

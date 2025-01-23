@@ -33,7 +33,7 @@ function AppRoutes() {
         <Route element={<PrivateRoute allowedRoles={[1,2]} />}>
             <Route path="/EasyBiz/business" element={<Dashboard />} />
             <Route path="/EasyBiz/client" element={<Store />} />
-            <Route path="/EasyBiz/Managemet" element={<ManagementPage />} />
+            <Route path="/EasyBiz/Management" element={<ManagementPage />} />
         </Route>     
         <Route path="*" element={<Navigate to="/EasyBiz/home" replace />} />  
     </Routes>
