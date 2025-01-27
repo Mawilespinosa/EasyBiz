@@ -31,6 +31,7 @@ const Login = () => {
         // Llamar a la función de login desde el AuthContext
  
         login({
+          name: user.name,
           role: user.role_id,
           email: user.email,
           roleChoice,

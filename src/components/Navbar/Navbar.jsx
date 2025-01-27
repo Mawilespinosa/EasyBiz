@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Nav from "react-bootstrap/Nav";
+import { Dropdown, Image } from "react-bootstrap";
 
 const NavBar = () => {
   const { user, logout } = useAuth();
@@ -97,13 +98,25 @@ const NavBar = () => {
             Iniciar Sesión
           </Button>
         ) : (
-          <Button
-            variant="danger"
-            onClick={handleLogout}
-            style={{ whiteSpace: "nowrap" }}
+          <Dropdown align="end">
+          <Dropdown.Toggle
+            variant="light"
+            id="user-dropdown"
+            className="p-0 border-0 rounded-circle d-flex align-items-center"
+            style={{ width: "40px", height: "40px", overflow: "hidden" }}
           >
-            Cerrar Sesión
-          </Button>
+            <Image
+              src="https://via.placeholder.com/40"
+              alt="User Avatar"
+              roundedCircle
+            />
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item disabled>{user.name || "Usuario"}</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item onClick={handleLogout}>Cerrar sesión</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
         )}
       </div>
     </nav>
