@@ -1,7 +1,11 @@
 /* General Styles */
-body {
+html, body {
     margin: 0;
     font-family: Arial, sans-serif;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
   }
   
   .main-container {
@@ -14,4 +18,20 @@ body {
 }
 .Azul-Claro {
   background: linear-gradient(135deg,#65abf7, #007bff);
+}
+footer {
+  background: #343a40;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  margin-top: auto;
+}
+.tienda-container {
+  flex: 1; /* Ocupa todo el espacio disponible */
+}
+#rootspace {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }

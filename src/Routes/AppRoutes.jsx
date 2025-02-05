@@ -34,6 +34,7 @@ function AppRoutes() {
             <Route path="/EasyBiz/business" element={<Dashboard />} />
             <Route path="/EasyBiz/client" element={<Store />} />
             <Route path="/EasyBiz/Management" element={<ManagementPage />} />
+            <Route path="/EasyBiz/store" element={<Store />} />
         </Route>     
         <Route path="*" element={<Navigate to="/EasyBiz/home" replace />} />  
     </Routes>

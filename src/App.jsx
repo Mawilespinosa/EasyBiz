@@ -9,11 +9,13 @@ function App() {
 
   return (
     <>
+     <div id="rootspace">
       <Navbar/>
       <main>
         <AppRoutes/>
       </main>
       <Footer/>
+      </div>
     </>
   )
 }
